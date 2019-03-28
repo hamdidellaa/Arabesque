@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { VisitorsComponent } from './visitors/visitors.component';
 
 import { DataApiService } from "./services/data-api.service"
+import { HelperService } from "./services/helper.service" 
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,7 @@ import { DataApiService } from "./services/data-api.service"
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [DataApiService],
+  providers: [DataApiService,HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

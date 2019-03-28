@@ -14,6 +14,7 @@ export class VisitorsComponent implements OnInit {
     this.apiService.getData().subscribe(data =>{
       console.log(data);
     })
+
   }
 
 }
