@@ -21,6 +21,7 @@ export class VisitorsComponent implements OnInit {
     if (moment(this.startDate).isAfter(this.endDate)) {
       this.msg = "start date is after end date"; 
     } else {
+      this.msg = ""; 
       this.data = this.helper.dateChange(this.startDate, this.endDate);
     }
   }
