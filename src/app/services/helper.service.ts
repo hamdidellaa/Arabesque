@@ -3,7 +3,7 @@ import * as moment from "moment";
 import * as _ from "lodash";
 import { of as observableOf, Observable } from "rxjs";
 import { DataApiService } from "./data-api.service";
-import { totalmem } from "os";
+
 
 @Injectable({
   providedIn: "root"
