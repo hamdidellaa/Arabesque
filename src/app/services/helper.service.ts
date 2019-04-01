@@ -18,7 +18,7 @@ export class HelperService {
   dateChange(dataList, startDate, endDate) {
     let data: any = [];
     const dateS = moment(startDate);
-    const dateE = moment(endDate);
+    const dateE = moment(endDate).add(1, "days");
     let testData = dataList.filter(
       item => moment(item.date).isBetween(dateS, dateE) && item.action == "LOAD"
     );
@@ -33,6 +33,7 @@ export class HelperService {
       let finalList = _.uniqBy(testList, "user_id");
       data.push({ Date: testDate, nbVisite: finalList.length });
     }
+    data.pop();
     return data;
   }
   getDataFilter(data) {

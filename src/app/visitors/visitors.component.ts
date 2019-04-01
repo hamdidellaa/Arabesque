@@ -3,6 +3,7 @@ import { HelperService } from "../services/helper.service";
 import * as moment from "moment";
 import { DataApiService } from "../services/data-api.service";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { toBase64String } from "@angular/compiler/src/output/source_map";
 @Component({
   selector: "app-visitors",
   templateUrl: "./visitors.component.html",
@@ -15,6 +16,7 @@ export class VisitorsComponent implements OnInit {
   msg: string = "";
   logs: any;
   dataList: any = [];
+  visites: number = 0;
   constructor(
     private apiService: DataApiService,
     private helper: HelperService
@@ -26,9 +28,7 @@ export class VisitorsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
   startDateChange(date: MatDatepickerInputEvent<Date>) {
     this.startDate = moment(date.value).format("Y-MM-DD");
     this.dateChange();
@@ -38,6 +38,7 @@ export class VisitorsComponent implements OnInit {
     this.dateChange();
   }
   dateChange() {
+    this.visites = 0 ;
     if (moment(this.startDate).isAfter(this.endDate)) {
       this.msg = "start date is after end date";
     } else {
@@ -47,6 +48,9 @@ export class VisitorsComponent implements OnInit {
         this.startDate,
         this.endDate
       );
+      this.data.forEach(element => {
+        this.visites += element.nbVisite;
+      });
     }
   }
 }
