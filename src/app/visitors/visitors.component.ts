@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HelperService } from "../services/helper.service";
 import * as moment from "moment";
+import { DataApiService } from "../services/data-api.service";
 @Component({
   selector: "app-visitors",
   templateUrl: "./visitors.component.html",
@@ -11,18 +12,27 @@ export class VisitorsComponent implements OnInit {
   endDate = moment("2018-10-02").format("Y-MM-DD");
   data: any;
   msg : string = "";
-  constructor(private helper: HelperService) {}
+  logs: any;
+  dataList: any = [];
+  constructor(private apiService: DataApiService,private helper: HelperService) {
+
+    this.apiService.getData().subscribe(data => {
+      this.logs = data;
+      this.dataList = this.logs.logs;
+    
+    });
+  }
 
   ngOnInit() {
     this.dateChange();
-  }
+    }
 
   dateChange() {
     if (moment(this.startDate).isAfter(this.endDate)) {
       this.msg = "start date is after end date"; 
     } else {
       this.msg = ""; 
-      this.data = this.helper.dateChange(this.startDate, this.endDate);
+      this.data = this.helper.dateChange(this.dataList,this.startDate, this.endDate);
     }
   }
 }

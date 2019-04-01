@@ -9,13 +9,15 @@ import { VisitorsComponent } from './visitors/visitors.component';
 import { DataApiService } from "./services/data-api.service"
 import { HelperService } from "./services/helper.service";
 import { BarChartComponent } from './visitors/bar-chart/bar-chart.component';
-import { PieChartComponent } from './visitors/pie-chart/pie-chart.component' 
+import { PieChartComponent } from './preference/pie-chart/pie-chart.component';
+import { PreferenceComponent } from './preference/preference.component' 
 @NgModule({
   declarations: [
     AppComponent,
     VisitorsComponent,
     BarChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    PreferenceComponent
   ],
   imports: [
     BrowserModule,
