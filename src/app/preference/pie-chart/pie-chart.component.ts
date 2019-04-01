@@ -30,32 +30,31 @@ export class PieChartComponent implements OnChanges {
   }
 
   createChart() {
-    // d3.select("svg").remove();
     const width = 1300;
     const height = 700;
     const element = this.chartContainer.nativeElement;
 
     const colors = d3.scaleOrdinal(d3.schemeDark2);
-    let svg = d3
+    const svg = d3
       .select(element)
       .append("svg")
       .attr("width", width)
       .attr("height", height);
 
-    let data = d3
+    const data = d3
       .pie()
       .sort(null)
-      .value(function(d) {
+      .value(function(d: any) {
         return d.value;
       })(this.data);
 
-    let segments = d3
+    const segments : any = d3
       .arc()
       .innerRadius(0)
-      .outerRadius(330)
+      .outerRadius(300)
       .padAngle(0.05)
       .padRadius(50);
-    let sections = svg
+    const sections = svg
       .append("g")
       .attr("transform", "translate(350, 350)")
       .attr("width", "1200")
@@ -66,19 +65,19 @@ export class PieChartComponent implements OnChanges {
       .enter()
       .append("path")
       .attr("d", segments)
-      .attr("fill", function(a) {
+      .attr("fill", function(a: any) {
         return colors(a.data.value);
       });
 
-    let content = d3
+    const content = d3
       .select("g")
       .selectAll("text")
       .data(data);
     content
       .enter()
       .append("text")
-      .classed("pieText",true)
-      .each(function(h) {
+      .classed("pieText", true)
+      .each(function(h: any) {
         var center = segments.centroid(h);
         d3.select(this)
           .attr("x", center[0])
@@ -86,36 +85,64 @@ export class PieChartComponent implements OnChanges {
           .text(h.data.value);
       });
 
-    let legends = svg
+    const legends = svg
       .append("g")
-      .attr("transform", "translate(700,10)")
+      .attr("transform", "translate(750,10)")
       .selectAll(".legends")
       .data(data);
-    let legend = legends
+    const legend = legends
       .enter()
       .append("g")
       .classed("legends", true)
       .attr("transform", function(d, i) {
         return "translate(0," + (i + 1) * 30 + ")";
       });
-      legend
+    legend
       .append("rect")
       .attr("width", 20)
       .attr("height", 20)
-      .attr("fill", function(d) {
+      .attr("fill", function(d: any) {
         return colors(d.data.value);
-      })
+      });
 
     legend
       .append("text")
       .classed("label", true)
-      .text(function(d) {
+      .text(function(d: any) {
         return d.data.preferance + " : " + d.data.value;
       })
-      .attr("fill", function(d) {
+      .attr("fill", function(d: any) {
         return colors(d.data.value);
       })
       .attr("x", 30)
-      .attr("y", 18);
+      .attr("y", 15);
+
+    ///////////
+    const tooltip = d3
+      .select(element)
+      .append("div")
+      .attr("class", "tooltip");
+    tooltip.append("div").attr("class", "label");
+
+    tooltip.append("div").attr("class", "count");
+
+    content.on("mouseover", function(d: any) {
+      // when mouse enters div
+console.log(d)
+      tooltip.select(".label").html("d.data.preferance");
+      tooltip.select(".count").html("d.data.value");
+      tooltip.style("display", "block");
+    });
+    content.on("mouseout", function() {
+      tooltip.style("display", "none");
+    });
+
+    content.on("mousemove", function(d) {
+      tooltip
+        .style("top", d3.event.layerY + 10 + "px")
+        .style("left", d3.event.layerX + 10 + "px");
+    });
+
+    ///////////
   }
 }

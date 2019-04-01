@@ -1,10 +1,22 @@
 
-start date
-<input type="date" name="startDate" id="startDate" [(ngModel)]="startDate" (ngModelChange)="dateChange()">
 
-end date
-<input type="date" name="endDate" id="endDate" [(ngModel)]="endDate" (ngModelChange)="dateChange()">
-<br>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Start Date" [value]="startDate"  (dateChange)="startDateChange($event)" >
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+<span>       </span>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker3" placeholder="End Date" [value]="endDate" (dateChange)="endDateChange($event)"  >
+    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+    <mat-datepicker #picker3></mat-datepicker>
+  </mat-form-field>
+
+
+  
 <p *ngIf="msg" style="color : red">{{msg}}</p>
 
 <app-bar-chart [data]="data"></app-bar-chart>
+
+

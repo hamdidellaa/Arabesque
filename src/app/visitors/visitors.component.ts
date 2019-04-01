@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HelperService } from "../services/helper.service";
 import * as moment from "moment";
 import { DataApiService } from "../services/data-api.service";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 @Component({
   selector: "app-visitors",
   templateUrl: "./visitors.component.html",
@@ -9,30 +10,43 @@ import { DataApiService } from "../services/data-api.service";
 })
 export class VisitorsComponent implements OnInit {
   startDate = moment("2018-10-01").format("Y-MM-DD");
-  endDate = moment("2018-10-02").format("Y-MM-DD");
+  endDate = moment("2018-10-10").format("Y-MM-DD");
   data: any;
-  msg : string = "";
+  msg: string = "";
   logs: any;
   dataList: any = [];
-  constructor(private apiService: DataApiService,private helper: HelperService) {
-
+  constructor(
+    private apiService: DataApiService,
+    private helper: HelperService
+  ) {
     this.apiService.getData().subscribe(data => {
       this.logs = data;
       this.dataList = this.logs.logs;
-    
+      this.dateChange();
     });
   }
 
   ngOnInit() {
+   
+  }
+  startDateChange(date: MatDatepickerInputEvent<Date>) {
+    this.startDate = moment(date.value).format("Y-MM-DD");
     this.dateChange();
-    }
-
+  }
+  endDateChange(date: MatDatepickerInputEvent<Date>) {
+    this.endDate = moment(date.value).format("Y-MM-DD");
+    this.dateChange();
+  }
   dateChange() {
     if (moment(this.startDate).isAfter(this.endDate)) {
-      this.msg = "start date is after end date"; 
+      this.msg = "start date is after end date";
     } else {
-      this.msg = ""; 
-      this.data = this.helper.dateChange(this.dataList,this.startDate, this.endDate);
+      this.msg = "";
+      this.data = this.helper.dateChange(
+        this.dataList,
+        this.startDate,
+        this.endDate
+      );
     }
   }
 }

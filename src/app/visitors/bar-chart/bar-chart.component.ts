@@ -17,32 +17,35 @@ import { DataBarModel } from "src/app/models/data.model";
 export class BarChartComponent implements OnChanges {
   @Input()
   data: DataBarModel[];
-  margin = { top: 20, right: 0, bottom: 30, left: 40 };
+  margin = { top: 20, right: 30, bottom: 30, left: 40 };
+element : any ;
+  constructor() {
 
-  constructor() {}
+  }
 
   @ViewChild("chart")
   private chartContainer: ElementRef;
 
   ngOnChanges(): void {
-    if (this.data.length == 2) {
+    this.element = this.chartContainer.nativeElement;
+    if (!this.data) {
       return;
     } else {
-      this.createChart();
+      this.createChart(this.element);
     }
   }
 
-  createChart(): void {
-    d3.select("svg").remove();
-
-    const element = this.chartContainer.nativeElement;
+  createChart(element): void {
+    d3.select("removeDiv").remove();
     const data = this.data;
-
+  
     const svg = d3
       .select(element)
+      .append("removeDiv")
       .append("svg")
       .attr("width", element.offsetWidth)
-      .attr("height", element.offsetHeight);
+      .attr("height", element.offsetHeight)
+      
 
     const contentWidth =
       element.offsetWidth - this.margin.left - this.margin.right;
