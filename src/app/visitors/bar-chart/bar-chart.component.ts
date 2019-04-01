@@ -44,13 +44,13 @@ element : any ;
       .append("removeDiv")
       .append("svg")
       .attr("width", element.offsetWidth)
-      .attr("height", element.offsetHeight)
+      .attr("height", 450)
       
 
     const contentWidth =
       element.offsetWidth - this.margin.left - this.margin.right;
-    const contentHeight =
-      element.offsetHeight - this.margin.top - this.margin.bottom;
+    const contentHeight = 380
+      //element.offsetHeight - this.margin.top - this.margin.bottom;
 
     const x = d3
       .scaleBand()
