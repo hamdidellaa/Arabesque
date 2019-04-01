@@ -5,7 +5,7 @@ import { PreferenceComponent } from './preference/preference.component';
 
 const routes: Routes = [
   {path : "" , component : VisitorsComponent},
-  {path : "pref" , component : PreferenceComponent}
+  {path : "preferance" , component : PreferenceComponent}
 ];
 
 @NgModule({

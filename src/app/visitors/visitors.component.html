@@ -1,22 +1,44 @@
+<br />
+<br />
+<div class="row">
+  <div class="col-md-2"><a  [routerLink]="[ '/']"><h3 style="margin-left: 30px">Unique Loads </h3></a></div>
+  <div class="col-md-3"><a  [routerLink]="[ '/preferance']"><h3 style="margin-left: 30px">Sectors Preferances </h3></a></div>
 
+</div>
+<br />
+<br />
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-1">
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker2"
+        placeholder="Start Date"
+        [value]="startDate"
+        (dateChange)="startDateChange($event)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-<mat-form-field>
-    <input matInput [matDatepicker]="picker2" placeholder="Start Date" [value]="startDate"  (dateChange)="startDateChange($event)" >
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
+  <div class="col-md-1"></div>
+  <div class="col-md-1">
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker3"
+        placeholder="End Date"
+        [value]="endDate"
+        (dateChange)="endDateChange($event)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
 
-<span>       </span>
-<mat-form-field>
-    <input matInput [matDatepicker]="picker3" placeholder="End Date" [value]="endDate" (dateChange)="endDateChange($event)"  >
-    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-    <mat-datepicker #picker3></mat-datepicker>
-  </mat-form-field>
-
-
-  
-<p *ngIf="msg" style="color : red">{{msg}}</p>
+<p *ngIf="msg" style="color : red">{{ msg }}</p>
 
 <app-bar-chart [data]="data"></app-bar-chart>
-
-

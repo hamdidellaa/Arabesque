@@ -48,7 +48,7 @@ export class PieChartComponent implements OnChanges {
         return d.value;
       })(this.data);
 
-    const segments : any = d3
+    const segments: any = d3
       .arc()
       .innerRadius(0)
       .outerRadius(300)
@@ -56,7 +56,7 @@ export class PieChartComponent implements OnChanges {
       .padRadius(50);
     const sections = svg
       .append("g")
-      .attr("transform", "translate(350, 350)")
+      .attr("transform", "translate(570, 350)")
       .attr("width", "1200")
       .selectAll("path")
       .data(data);
@@ -87,7 +87,7 @@ export class PieChartComponent implements OnChanges {
 
     const legends = svg
       .append("g")
-      .attr("transform", "translate(750,10)")
+      .attr("transform", "translate(900,10)")
       .selectAll(".legends")
       .data(data);
     const legend = legends
@@ -123,12 +123,9 @@ export class PieChartComponent implements OnChanges {
       .append("div")
       .attr("class", "tooltip");
     tooltip.append("div").attr("class", "label");
-
     tooltip.append("div").attr("class", "count");
 
     content.on("mouseover", function(d: any) {
-      // when mouse enters div
-console.log(d)
       tooltip.select(".label").html("d.data.preferance");
       tooltip.select(".count").html("d.data.value");
       tooltip.style("display", "block");
